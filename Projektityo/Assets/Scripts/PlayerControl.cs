@@ -8,22 +8,24 @@ public class PlayerControl : MonoBehaviour
 {
     private float speed;
     
-    private float xBoundry = 4.5f;
+    private float xBoundry = 5.2f;
 
     private float yBoundry = 3.8f;
 
     private float frameTime;
+    public float playerLevel = 1;
 
     public GameObject projectile;
+    public GameObject levelProjectile;
     
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60;
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         frameTime += Time.deltaTime;
         
@@ -62,8 +64,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (frameTime > .07)
             {
-                Instantiate(projectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , projectile.transform.rotation);
-                Instantiate(projectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , projectile.transform.rotation);
+                ShootStuff();
                 frameTime = 0;
             }
         }
@@ -72,6 +73,17 @@ public class PlayerControl : MonoBehaviour
         
         transform.Translate(Vector2.right * (horizontalInput * speed * Time.deltaTime));
         transform.Translate(Vector2.up * (verticalInput * speed * Time.deltaTime));
+        
+        
+    }
 
+    private void ShootStuff()
+    {
+        Instantiate(projectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , projectile.transform.rotation);
+        Instantiate(projectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , projectile.transform.rotation);
+        
+        Instantiate(levelProjectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , Quaternion.Euler(0,0, -20));
+        Instantiate(levelProjectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , Quaternion.Euler(0,0, 20));
+        
     }
 }

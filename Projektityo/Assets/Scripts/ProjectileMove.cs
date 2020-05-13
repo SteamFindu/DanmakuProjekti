@@ -16,7 +16,7 @@ public class ProjectileMove : MonoBehaviour
     {
         transform.Translate(Vector2.up * (speed * Time.deltaTime));
 
-        if (transform.position.y > 10 )
+        if (transform.position.y > 6 )
         {
             Destroy(gameObject);
         }
