@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5860647290974929918}
   - component: {fileID: 8743559920007606667}
   - component: {fileID: 114005188579910164}
+  - component: {fileID: 58468238068058516}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -93,3 +94,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullets: {fileID: 6346651537318580341, guid: d5e37ea7793cc5143acf5ddd3952fe4a, type: 3}
+--- !u!58 &58468238068058516
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2302264537141624997}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

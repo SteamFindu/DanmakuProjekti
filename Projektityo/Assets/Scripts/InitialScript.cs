@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class InitialScript : MonoBehaviour
 {
-    public float gameTime;
+    private float gameTime;
+    public static int _realTime;
     public void Start()
     {
         Application.targetFrameRate = 60;
@@ -18,5 +19,13 @@ public class InitialScript : MonoBehaviour
     void Update()
     {
         gameTime += Time.deltaTime;
+
+        if (gameTime > 1)
+        {
+            gameTime -= 1;
+            _realTime += 1;
+        }
+        
+        Debug.Log(_realTime);
     }
 }

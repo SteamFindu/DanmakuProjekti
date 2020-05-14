@@ -68,8 +68,6 @@ public class PlayerControl : MonoBehaviour
                 frameTime = 0;
             }
         }
-
-        Debug.Log(frameTime);    
         
         transform.Translate(Vector2.right * (horizontalInput * speed * Time.deltaTime));
         transform.Translate(Vector2.up * (verticalInput * speed * Time.deltaTime));
@@ -84,6 +82,13 @@ public class PlayerControl : MonoBehaviour
         
         Instantiate(levelProjectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , Quaternion.Euler(0,0, -20));
         Instantiate(levelProjectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , Quaternion.Euler(0,0, 20));
-        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyBullet") || other.gameObject.CompareTag("Enemy"))
+        {
+            // TODO create script that kills the player and respawns them
+        }
     }
 }
