@@ -25,7 +25,5 @@ public class InitialScript : MonoBehaviour
             gameTime -= 1;
             _realTime += 1;
         }
-        
-        Debug.Log(_realTime);
     }
 }

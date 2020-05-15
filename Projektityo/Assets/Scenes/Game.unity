@@ -342,12 +342,12 @@ GameObject:
   - component: {fileID: 818500899}
   - component: {fileID: 818500900}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &818500899
 Transform:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.24056602, g: 0.4936067, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -560,6 +560,7 @@ MonoBehaviour:
     type: 3}
   levelProjectile: {fileID: 2161666505767748387, guid: d277ef5b81b7132468df9ead47d6d28d,
     type: 3}
+  hitbox: {fileID: 818500898}
 --- !u!58 &1673118609
 CircleCollider2D:
   m_ObjectHideFlags: 0

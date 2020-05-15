@@ -4,6 +4,7 @@ namespace Enemies.BasicEnemy1
 {
     public class BasicEnemy1Script : MainEnemy
     {
+
         // Start is called before the first frame update
         void Start()
         {
@@ -11,8 +12,17 @@ namespace Enemies.BasicEnemy1
         }
 
         // Update is called once per frame
-        void Update()
+        protected override void Update()
         {
+            base.Update();
+            
+            
+        }
+
+        protected override void OnCollisionEnter2D(Collision2D other)
+        {
+            base.OnCollisionEnter2D(other);
+            
         }
     }
 }

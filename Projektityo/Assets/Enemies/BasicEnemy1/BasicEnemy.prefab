@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8743559920007606667}
   - component: {fileID: 114005188579910164}
   - component: {fileID: 58468238068058516}
+  - component: {fileID: 50711726355650614}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -93,7 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533640c278ff5e04991f8a3133d38267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullets: {fileID: 6346651537318580341, guid: d5e37ea7793cc5143acf5ddd3952fe4a, type: 3}
+  bullet: {fileID: 6346651537318580341, guid: d5e37ea7793cc5143acf5ddd3952fe4a, type: 3}
+  health: 100
+  speed: 1
 --- !u!58 &58468238068058516
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -110,3 +113,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!50 &50711726355650614
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2302264537141624997}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -13,10 +13,12 @@ public class PlayerControl : MonoBehaviour
     private float yBoundry = 3.8f;
 
     private float frameTime;
+    private float zRotation;
     public float playerLevel = 1;
 
     public GameObject projectile;
     public GameObject levelProjectile;
+    public GameObject hitbox;
     
     // Start is called before the first frame update
     void Start()
@@ -52,12 +54,15 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = 3;
-            
+            speed = 4;
+            zRotation = 7;
+            hitbox.SetActive(true);
         }
         else
         {
             speed = 10;
+            zRotation = 20;
+            hitbox.SetActive(false);
         }
 
         if (Input.GetKey(KeyCode.Z))
@@ -80,14 +85,15 @@ public class PlayerControl : MonoBehaviour
         Instantiate(projectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , projectile.transform.rotation);
         Instantiate(projectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , projectile.transform.rotation);
         
-        Instantiate(levelProjectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , Quaternion.Euler(0,0, -20));
-        Instantiate(levelProjectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , Quaternion.Euler(0,0, 20));
+        Instantiate(levelProjectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , Quaternion.Euler(0,0, -zRotation));
+        Instantiate(levelProjectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , Quaternion.Euler(0,0, zRotation));
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("EnemyBullet") || other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("got hit");
             // TODO create script that kills the player and respawns them
         }
     }
