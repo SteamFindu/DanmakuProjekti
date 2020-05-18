@@ -19,6 +19,10 @@ public class EnemyManagement : MonoBehaviour
         if (InitialScript._realTime == 5 && maxAmm == 1)
         {
             Instantiate(basicEnemy,new Vector2(0, 5) , basicEnemy.transform.rotation);
+            Instantiate(basicEnemy,new Vector2(2, 7) , basicEnemy.transform.rotation);
+            Instantiate(basicEnemy,new Vector2(-1, 5) , basicEnemy.transform.rotation);
+            Instantiate(basicEnemy,new Vector2(0.5f, 9) , basicEnemy.transform.rotation);
+
             maxAmm++;
         }
     }

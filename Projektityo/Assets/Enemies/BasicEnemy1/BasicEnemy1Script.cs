@@ -4,11 +4,12 @@ namespace Enemies.BasicEnemy1
 {
     public class BasicEnemy1Script : MainEnemy
     {
-
+        
         // Start is called before the first frame update
         void Start()
         {
-            
+            shootInterval = .8f;    
+            speed = .5f;
         }
 
         // Update is called once per frame
@@ -19,9 +20,9 @@ namespace Enemies.BasicEnemy1
             
         }
 
-        protected override void OnCollisionEnter2D(Collision2D other)
+        protected override void OnTriggerEnter2D(Collider2D other)
         {
-            base.OnCollisionEnter2D(other);
+            base.OnTriggerEnter2D(other);
             
         }
     }

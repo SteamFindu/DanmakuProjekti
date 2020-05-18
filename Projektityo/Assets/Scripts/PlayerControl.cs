@@ -88,13 +88,28 @@ public class PlayerControl : MonoBehaviour
         Instantiate(levelProjectile, new Vector2(transform.position.x + 0.3f, transform.position.y) , Quaternion.Euler(0,0, -zRotation));
         Instantiate(levelProjectile, new Vector2(transform.position.x - 0.3f, transform.position.y) , Quaternion.Euler(0,0, zRotation));
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("EnemyBullet") || other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("EnemyBullet"))
         {
             Debug.Log("got hit");
-            // TODO create script that kills the player and respawns them
+            OnDeath();
         }
+    }
+    // TODO remove all collisions and use triggers instead
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("got hit enemy");
+            OnDeath();
+        }
+    }
+
+    private void OnDeath()
+    {
+        // TODO create script that kills the player and respawns them
+
     }
 }
