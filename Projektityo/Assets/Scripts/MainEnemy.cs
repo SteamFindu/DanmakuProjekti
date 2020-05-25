@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
+// Script for the main enemy behaviour
 public class MainEnemy : MonoBehaviour
 {
     public GameObject bullet;
 
     public int health = 100;
-    
+
+    private int yRange = -6;
+
     public float speed = 0.5f;
 
+    public int scoreGive;
+    
     private float gameTime;
 
     private Collider2D enemyCollision;
@@ -41,9 +48,14 @@ public class MainEnemy : MonoBehaviour
             BulletScript();
             gameTime -= 1;
         }
+
+        if(transform.position.y < yRange)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void BulletScript()
+    private void BulletScript()
     {
         Instantiate(bullet, new Vector2(transform.position.x , transform.position.y) , Quaternion.Euler(0,0, bulletAngle));
     }
@@ -53,5 +65,13 @@ public class MainEnemy : MonoBehaviour
         if (!other.gameObject.CompareTag("PlayerBullet")) return;
         health--;
         Destroy(other.gameObject);
+    }
+
+    // fix the scoring
+    public virtual void OnDestroy()
+    {
+        EnemyManagement.UpdateScore(scoreGive);
+
+        Debug.Log("enemy destroy");
     }
 }

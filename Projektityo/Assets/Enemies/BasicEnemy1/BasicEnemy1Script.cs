@@ -10,20 +10,24 @@ namespace Enemies.BasicEnemy1
         {
             shootInterval = .8f;    
             speed = .5f;
+            scoreGive = 100;
         }
 
         // Update is called once per frame
         protected override void Update()
         {
             base.Update();
-            
-            
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other);
             
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
         }
     }
 }

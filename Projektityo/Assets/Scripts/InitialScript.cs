@@ -6,10 +6,12 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+// Initial script used for timing
 public class InitialScript : MonoBehaviour
 {
     private float gameTime;
-    public static int _realTime;
+    public static int RealTime; // global int timer, not completely correct but who cares
+    
     public void Start()
     {
         Application.targetFrameRate = 60;
@@ -23,7 +25,8 @@ public class InitialScript : MonoBehaviour
         if (gameTime > 1)
         {
             gameTime -= 1;
-            _realTime += 1;
+            RealTime += 1;
         }
+        
     }
 }

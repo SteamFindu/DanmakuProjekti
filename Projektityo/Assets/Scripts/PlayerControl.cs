@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
+using TMPro;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -14,23 +14,28 @@ public class PlayerControl : MonoBehaviour
 
     private float frameTime;
     private float zRotation;
+
+    private int InvincibilityTimer;
+
     public float playerLevel = 1;
+
+    private int lives = 3;
+
+    private bool invincibility;
 
     public GameObject projectile;
     public GameObject levelProjectile;
     public GameObject hitbox;
+    public TextMeshProUGUI livesText;
+    public GameObject gameOverText;
+    public SpriteRenderer PlayerSprite;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         frameTime += Time.deltaTime;
-        
+     
+        // Get the input, move the charecter if it is in boundries
         float verticalInput = Input.GetAxisRaw("Vertical");
         float horizontalInput = Input.GetAxisRaw("Horizontal");
 
@@ -52,6 +57,7 @@ public class PlayerControl : MonoBehaviour
             transform.position = new Vector2(transform.position.x, -yBoundry);
         }
 
+        // Slow with Shift
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = 4;
@@ -65,6 +71,7 @@ public class PlayerControl : MonoBehaviour
             hitbox.SetActive(false);
         }
 
+        // Shoot with Z
         if (Input.GetKey(KeyCode.Z))
         {
             if (frameTime > .07)
@@ -74,10 +81,34 @@ public class PlayerControl : MonoBehaviour
             }
         }
         
+        // possibly make the movement a part of the border check?
         transform.Translate(Vector2.right * (horizontalInput * speed * Time.deltaTime));
         transform.Translate(Vector2.up * (verticalInput * speed * Time.deltaTime));
-        
-        
+
+        // flash sprite when invincible
+        if (invincibility && InitialScript.RealTime < InvincibilityTimer)
+        {
+            if (PlayerSprite.material.color == Color.white) // if sprite is normal
+            {
+                PlayerSprite.material.color = Color.blue;
+            }
+
+            if (PlayerSprite.material.color == Color.blue) // if sprite is flashing
+            {
+                PlayerSprite.material.color = Color.white;
+            }
+        }
+
+        if (InvincibilityTimer < InitialScript.RealTime)
+        {
+            invincibility = false;
+        }
+
+        if (lives == 0)
+        {
+            Destroy(gameObject);
+            gameOverText.SetActive(true);
+        }
     }
 
     private void ShootStuff()
@@ -91,25 +122,23 @@ public class PlayerControl : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("EnemyBullet"))
+        if (other.gameObject.CompareTag("EnemyBullet") && !invincibility || other.gameObject.CompareTag("Enemy") && !invincibility)
         {
             Debug.Log("got hit");
             OnDeath();
         }
     }
-    // TODO remove all collisions and use triggers instead
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("got hit enemy");
-            OnDeath();
-        }
-    }
+
 
     private void OnDeath()
     {
-        // TODO create script that kills the player and respawns them
+        // on death events
+        
+        invincibility = true;
+        lives -= 1;
+        livesText.text = "Lives: " + lives;
+        transform.position = new Vector2(0, -3);
+        InvincibilityTimer = InitialScript.RealTime + 3; // + is how much time the invincibility will be
 
     }
 }
