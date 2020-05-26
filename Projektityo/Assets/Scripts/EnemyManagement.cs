@@ -6,6 +6,7 @@ using TMPro;
 public class EnemyManagement : MonoBehaviour
 {
     public GameObject basicEnemy;
+    public GameObject basicEnemy2;
 
     private int maxAmm = 1;
     
@@ -35,6 +36,16 @@ public class EnemyManagement : MonoBehaviour
         {
             Instantiate(basicEnemy,new Vector2(-3, 5) , basicEnemy.transform.rotation);
             Instantiate(basicEnemy,new Vector2(-1, 6) , basicEnemy.transform.rotation);
+            
+            maxAmm++;
+        }
+
+        if (InitialScript.RealTime == 30 && maxAmm == 3)
+        {
+            Instantiate(basicEnemy2,new Vector2(2, 5.3f) , basicEnemy2.transform.rotation);
+            Instantiate(basicEnemy2,new Vector2(-4, 5) , basicEnemy2.transform.rotation);
+            Instantiate(basicEnemy2,new Vector2(0.5f, 5.8f) , basicEnemy2.transform.rotation);
+
             maxAmm++;
         }
     }

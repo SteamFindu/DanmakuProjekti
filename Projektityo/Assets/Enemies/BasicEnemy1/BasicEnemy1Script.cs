@@ -24,10 +24,6 @@ namespace Enemies.BasicEnemy1
             base.OnTriggerEnter2D(other);
             
         }
-
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
-        }
+        
     }
 }

@@ -520,6 +520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicEnemy: {fileID: 2302264537141624997, guid: edcfadbb61216b04ab024980caa871d5,
     type: 3}
+  basicEnemy2: {fileID: 576446663095998385, guid: 50e2d7ac15a6386409b192c5db802309,
+    type: 3}
 --- !u!4 &414898646
 Transform:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     private float yBoundry = 3.8f;
 
     private float frameTime;
+    private float flashTime;
     private float zRotation;
 
     private int InvincibilityTimer;
@@ -29,11 +30,16 @@ public class PlayerControl : MonoBehaviour
     public TextMeshProUGUI livesText;
     public GameObject gameOverText;
     public SpriteRenderer PlayerSprite;
-    
-    
+
+    private void Start()
+    {
+        PlayerSprite.material.color = Color.white;
+    }
+
     void FixedUpdate()
     {
         frameTime += Time.deltaTime;
+        flashTime += Time.deltaTime;
      
         // Get the input, move the charecter if it is in boundries
         float verticalInput = Input.GetAxisRaw("Vertical");
@@ -85,23 +91,31 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(Vector2.right * (horizontalInput * speed * Time.deltaTime));
         transform.Translate(Vector2.up * (verticalInput * speed * Time.deltaTime));
 
-        // flash sprite when invincible
-        if (invincibility && InitialScript.RealTime < InvincibilityTimer)
+        // flash sprite when invincible, does not work for some reason????
+        if (flashTime > .1)
         {
-            if (PlayerSprite.material.color == Color.white) // if sprite is normal
+            if (invincibility)
             {
-                PlayerSprite.material.color = Color.blue;
+                if (PlayerSprite.material.color == Color.white) // if sprite is normal
+                {
+                    PlayerSprite.material.color = Color.cyan;
+                    Debug.Log("blue");
+                }
+                else if (PlayerSprite.material.color == Color.cyan) // if sprite is flashing
+                {
+                    PlayerSprite.material.color = Color.white;
+                    Debug.Log("white");
+                }
             }
 
-            if (PlayerSprite.material.color == Color.blue) // if sprite is flashing
-            {
-                PlayerSprite.material.color = Color.white;
-            }
+            flashTime = 0;
         }
+        
 
         if (InvincibilityTimer < InitialScript.RealTime)
         {
             invincibility = false;
+            PlayerSprite.material.color = Color.white;
         }
 
         if (lives == 0)
@@ -139,6 +153,5 @@ public class PlayerControl : MonoBehaviour
         livesText.text = "Lives: " + lives;
         transform.position = new Vector2(0, -3);
         InvincibilityTimer = InitialScript.RealTime + 3; // + is how much time the invincibility will be
-
     }
 }

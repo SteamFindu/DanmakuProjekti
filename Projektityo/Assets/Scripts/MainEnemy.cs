@@ -22,15 +22,10 @@ public class MainEnemy : MonoBehaviour
 
     private Collider2D enemyCollision;
 
-    private int bulletAngle = 180;
+    public int bulletAngle = 180;
 
     public float shootInterval = 0.3f;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     protected virtual void Update()
@@ -41,12 +36,13 @@ public class MainEnemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            EnemyManagement.UpdateScore(scoreGive);
         }
 
         if (gameTime > shootInterval)
         {
             BulletScript();
-            gameTime -= 1;
+            gameTime -= shootInterval;
         }
 
         if(transform.position.y < yRange)
@@ -65,13 +61,5 @@ public class MainEnemy : MonoBehaviour
         if (!other.gameObject.CompareTag("PlayerBullet")) return;
         health--;
         Destroy(other.gameObject);
-    }
-
-    // fix the scoring
-    public virtual void OnDestroy()
-    {
-        EnemyManagement.UpdateScore(scoreGive);
-
-        Debug.Log("enemy destroy");
     }
 }
